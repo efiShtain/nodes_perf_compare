@@ -4,7 +4,7 @@ Simple RPS comparison between some nodejs frameworks (express, fastify, etc...)
 with / without logging to console.log
 with / without piping stdout to other process
 
-TL;DR
+## TL;DR
 Logs has hugh impact on performance event with simple logging. 
 Fastify without logs is much faster than express (100% faster)
 
@@ -12,18 +12,19 @@ Fastify without logs - 315K/10s
 
 Express without logs - 169k/10s
 
+Difference between writing and not writing logs can be of one order magnitude difference (30k->315K requests per 10 seconds)
+
+## Reproduce Results Yourself
 To run the tests:
 1. npm i -g autocannon - a utility to create a load against the server
 2. start one of the servers, i.e. node express.js / node fastify-no-logs.js
 3. in another terminal run autocannon http://localhost:3000
 4. results would be printed on screen
 
-Results I got:
+## Results
 
-
-
-express server
-
+### express server
+```
 Running 10s test @ http://localhost:3000
 10 connections
 
@@ -43,10 +44,10 @@ Running 10s test @ http://localhost:3000
 Req/Bytes counts sampled once per second.
 
 169k requests in 11.04s, 38.7 MB read
+```
 
-
-express with logs
-
+### express with logs
+```
 Running 10s test @ http://localhost:3000
 10 connections
 
@@ -66,10 +67,10 @@ Running 10s test @ http://localhost:3000
 Req/Bytes counts sampled once per second.
 
 31k requests in 10.03s, 7.15 MB read
+```
 
-
-express with logs, stdout piped to grep (node express-with-logs.js | grep GET)
-
+### express with logs, stdout piped to grep (node express-with-logs.js | grep GET)
+```
 Running 10s test @ http://localhost:3000
 10 connections
 
@@ -89,9 +90,10 @@ Running 10s test @ http://localhost:3000
 Req/Bytes counts sampled once per second.
 
 66k requests in 10.04s, 15.2 MB read
+```
 
-fastify-with-logs
-
+### fastify-with-logs
+```
 Running 10s test @ http://localhost:3000
 10 connections
 
@@ -111,10 +113,10 @@ Running 10s test @ http://localhost:3000
 Req/Bytes counts sampled once per second.
 
 21k requests in 10.03s, 3.47 MB read
+```
 
-
-fastify-with-logs piped to grep reqId
-
+### fastify-with-logs piped to grep reqId
+```
 Running 10s test @ http://localhost:3000
 10 connections
 
@@ -134,13 +136,10 @@ Running 10s test @ http://localhost:3000
 Req/Bytes counts sampled once per second.
 
 85k requests in 10.06s, 14 MB read
+```
 
-
-
-
-
-fastify no logs
-
+### fastify no logs
+```
 Running 10s test @ http://localhost:3000
 10 connections
 
@@ -160,5 +159,5 @@ Running 10s test @ http://localhost:3000
 Req/Bytes counts sampled once per second.
 
 315k requests in 10.04s, 51.6 MB read
-
+```
 
