@@ -14,6 +14,8 @@ Express without logs - 169k/10s
 
 Difference between writing and not writing logs can be of one order magnitude difference (30k->315K requests per 10 seconds)
 
+Piping the stdout stream to another process can speed up the program by 100% (from 30K to 66K requests per 10 seconds)
+
 ## Reproduce Results Yourself
 To run the tests:
 1. npm i -g autocannon - a utility to create a load against the server
